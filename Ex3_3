@@ -1,5 +1,5 @@
 /*
-Computational Physics Excercise #3 Problem 3
+Computational Physics Exercise #3 Problem 3
 ..................................................................................
 3. Print out a following multiplication table by using loop statements.
   2*1=2 2*2=4 ... 2*9=18
@@ -13,7 +13,7 @@ Hint : You can use either "for" or "while" statements
 Warning! : For infinite loop, Ctrl+C will terminate the loop
 */
 
-//My answer
+//My answer 
 #include <stdio.h>
 int main(){
         int i=2;
@@ -26,10 +26,46 @@ int main(){
                       printf("%d*%d=%d ", i, j, i*j); // k=i*j also works
 
                       }
-                printf("\n");
+                printf("\n"); // considered location of \n 
                 i=i+1;
                 j=j-9;
                 }
                 return 0;
 }
          
+//Other answers
+
+#include <stdio.h>
+#include <math.h>
+#define N 4
+// float func(int a, int b);
+int main(){
+        int i, j;
+
+        float v[N][N]; // define array v
+
+        for(i=0; i<N; i++){
+        for(j=0; j<N; j++){
+                v[i][j]=exp(i*j);
+        //      printf("v[%d][%d]=%f\n", i, j, v[i][j]);
+        // you can print out matrix using for statement twice
+        }
+        }
+        int m, n;
+        scanf("%d %d", &m, &n);
+        printf("v[%d][%d]=%f\n", m, n, v[m][n]);
+
+}
+/* float func(int a, int b){
+        float c;
+        c=exp(a*b);
+        return c;
+
+}
+*/
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                        
