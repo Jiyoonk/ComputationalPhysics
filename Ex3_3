@@ -33,39 +33,6 @@ int main(){
                 return 0;
 }
          
-//Other answers
-
-#include <stdio.h>
-#include <math.h>
-#define N 4
-// float func(int a, int b);
-int main(){
-        int i, j;
-
-        float v[N][N]; // define array v
-
-        for(i=0; i<N; i++){
-        for(j=0; j<N; j++){
-                v[i][j]=exp(i*j);
-        //      printf("v[%d][%d]=%f\n", i, j, v[i][j]);
-        // you can print out matrix using for statement twice
-        }
-        }
-        int m, n;
-        scanf("%d %d", &m, &n);
-        printf("v[%d][%d]=%f\n", m, n, v[m][n]);
-
-}
-/* float func(int a, int b){
-        float c;
-        c=exp(a*b);
-        return c;
-
-}
-*/
-~                                                                               
-~                                                                               
-~                                                                               
-~                                                                               
+                                                             
 ~                                                                               
 ~                        
