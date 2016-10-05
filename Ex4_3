@@ -1,0 +1,37 @@
+/*
+Computational Physics Exercise #4 Problem 3
+..................................................................................
+Make a function with two real-number inputs a, b and return a larger number as an output.
+Use the function to print out maximum number among three real numbers from the keyboard.
+..................................................................................
+*/
+
+#include <stdio.h>
+float func(float a, float b);
+float main(){
+
+        float i, j, k;
+
+        scanf("%f %f %f", &i, &j, &k);
+        float m;
+        m=func(i, j);
+        printf("comparison 1 = %f\n", m);
+
+        printf("comparison 2, maximum number = %f\n", func(m, k));
+        printf("maximum number = %f\n", func(func(i, j), k));
+}
+
+float func(float a, float b){
+        float c;
+        if (a>b) c=a;
+        else c=b;
+        return c;
+
+}
+
+
+
+~                                                                               
+~                                                                               
+~                                                                               
+~     
