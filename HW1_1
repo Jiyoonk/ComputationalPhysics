@@ -1,0 +1,23 @@
+/*
+Computational Physics HW#1
+Problem 1
+
+#include <stdio.h>
+#define N 10
+float func(float x);
+int main(){
+
+
+float sum=0;
+float a
+
+for (a=1; a<10; a++){
+	sum=sum+func(a);
+}
+printf(“S10=%f\n”, sum);
+}
+float func(float x){
+	float y
+	y=1/(x^2+1)
+	return y;
+}
