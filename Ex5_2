@@ -15,7 +15,7 @@ int main(){
 
 
         printf("h F2 S3 S5\n");
-        for (h=1.0;h>=0.00001;){
+        for (h=1.0;h>=0.000005;){
         h=h/10.0;
         printf("h=%f f'(1)~%.12f %.12f %.12f\n", h,
         (func(x+h)-func(x))/h,
@@ -50,7 +50,7 @@ int main(){
         double h;
 
         printf("h F2 S3 S5\n");
-        for (h=1.0;h>=0.0001;){
+        for (h=1.0;h>=0.000005;){
                 h=h/10;
                 printf("h=%f f'(1)~ %.12lf %.12lf %.12lf\n", h,
                 (func(x+h)-func(x))/h,
