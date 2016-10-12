@@ -1,0 +1,43 @@
+// scalar potential phi(x)
+// double precision
+#include <stdio.h>
+#include <math.h>
+double func(double x);
+int main(){
+        double x;
+        double h;
+
+
+
+        for (x=0.1;x<1.0;){
+        printf("x=%.1lf\n", x);
+        printf("h F2 S3 S5\n");
+        for (h=1.0;h>=0.0000005;){
+
+        h=h/10.0;
+
+        printf("h=%.7lf Electric field %.12lf %.12lf %.12lf\n", h,
+        -(func(x+h)-func(x))/h,
+        -(func(x+h)-func(x-h))/(2*h),
+        -(func(x-2*h)-8*func(x-h)+8*func(x+h)-func(x+2*h))/(12*h));
+
+
+
+        }
+        printf("\n");
+        x=x+0.4;
+
+}
+return 0;
+
+
+}
+double func(double x){
+        double a=1.0;
+        double y;
+        y=sqrt(1.0-(x/a)*(x/a));
+        return y;
+
+}
+~                                                                            
+~ 
