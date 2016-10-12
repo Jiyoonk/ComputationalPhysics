@@ -1,0 +1,83 @@
+/*
+This contains two independent code files
+Conclusion : a double precision is much more accurate than a single precision
+output value is 12 digits, h is 6 digits.
+*/
+
+//.......................................
+/* single precision - float */
+
+#include <stdio.h>
+float func(float x);
+int main(){
+        float x=1.0;
+        float h;
+
+
+        printf("h F2 S3 S5\n");
+        for (h=1.0;h>=0.00001;){
+        h=h/10.0;
+        printf("h=%f f'(1)~%.12f %.12f %.12f\n", h,
+        (func(x+h)-func(x))/h,
+        (func(x+h)-func(x-h))/(2*h),
+        (func(x-2*h)-8*func(x-h)+8*func(x+h)-func(x+2*h))/(12*h));
+
+
+
+        }
+
+return 0;
+
+
+}
+float func(float x){
+        float y;
+        y=1.0/(1.0+x*x);
+        return y;
+
+}
+
+// S3 3rd~ output value -0.500008523464 gets more errors
+// S5 5th output value has -0.55679075718... larger error than 4th value
+
+//.........................................
+/* double precision - double */
+
+#include <stdio.h>
+double func(double x);
+int main(){
+        double x=1.0;
+        double h;
+
+        printf("h F2 S3 S5\n");
+        for (h=1.0;h>=0.0001;){
+                h=h/10;
+                printf("h=%f f'(1)~ %.12lf %.12lf %.12lf\n", h,
+                (func(x+h)-func(x))/h,
+                (func(x+h)-func(x-h))/(2*h),
+                (func(x-2*h)-8*func(x-h)+8*func(x+h)-func(x+2*h))/(12*h));
+
+        }
+        return 0;
+
+}
+double func(double x){
+        double y;
+        y=1.0/(1.0+x*x);
+        return y;
+}     
+
+// all F2, S3, S5 are getting close to -0.5, however, 5th output of both S3 and S5 have errors.. 
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                      
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                                                                               
+~                   
+
+
