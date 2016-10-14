@@ -1,23 +1,28 @@
-/* HW #1 Problem 1 */
+/* HW #1 Probelm 1*/
 #include <stdio.h>
 #define N 10
 double func(double x);
 int main(){
 
-        double sum=0;
-        double a;
+        double sum=0.0;
+        double a=1.0;
+        double i;
 
-        for (a=1.0; a<N; a++){
-                sum=sum+func(a);
+        for (i=1.0; i<=N; i++){
+                sum=sum+a;
+                a=func(a);
+
         }
-        printf("S10=%.12lf\n", sum);
 
-return 0;
+        printf("S%d=%.12lf\n", N, sum);
+
+        return 0;
 
 }
 double func(double x){
         double y;
-        y=1.0/(x*x+1);
+        y=1.0/(x*x+1.0);
         return y;
 
 }
+
