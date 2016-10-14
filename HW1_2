@@ -1,0 +1,30 @@
+/* HW #1 Problem 2*/
+#include <stdio.h>
+int main(){
+
+        int a, b, c, d;
+        int x1, x2, y1, y2;
+
+        scanf("%d %d %d %d", &a, &b, &c, &d);
+        // z1=a+i*b, z2=c+i*d
+
+
+        printf("z1=%d+i%d\n", a, b);
+        printf("z2=%d+i%d\n", c, d);
+        printf("\n");
+        x1=a+c;
+        y1=b+d;
+        x2=a*c-b*d;
+        y2=a*d+b*c;
+
+        if (y1>=0)      printf("z1+z2=%d+%di\n", x1, y1);
+        else            printf("z1+z2=%d%di\n", x1, y1);
+
+
+        if (y2>=0)      printf("z1*z2=%d+%di\n", x2, y2);
+        else            printf("z1*z2=%d%di\n", x2, y2);
+        
+//What about x1, y1, x2, y2==0?
+
+
+return 0;
