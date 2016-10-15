@@ -1,0 +1,26 @@
+/* HW #1 Probelm 3 */
+#include <stdio.h>
+#include <math.h>
+double func(double x);
+int main() {
+        double x=1.5;
+        double h;
+
+        printf("h F2 S3 S5 for spherical bessel function\n");
+        for (h=1.0; h>=0.000005;){
+                h=h/10;
+        printf("h=%f j1(1.5)~ %.4lf %.4lf %.4lf\n", h,
+        -(func(x+h)-func(x))/h,
+        -(func(x+h)-func(x-h))/(2*h),
+        -(func(x-2*h)-8*func(x-h)+8*func(x+h)-func(x+2*h))/(12*h));
+
+        }
+        return 0;
+
+}
+double func(double x){
+        double y;
+        y=sin(x)/x;
+        return y;
+
+}
