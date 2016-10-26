@@ -1,0 +1,54 @@
+//ex6_3
+#include <stdio.h>
+#include <math.h>
+double fx(double x, double a);
+int main(){
+
+        char fs[80];
+        FILE *fo;
+
+        double x1=0.0, x2, x3, a;
+        double f1, f2, f3;
+        int i=1;
+
+        scanf("%lf", &a);
+                if (a>1) x2=a;
+                else x2=1.0;
+
+        sprintf(fs, "sol_%lf.d", a); //string print
+
+        fo=fopen(fs, "w"); //open the file
+        fprintf(fo, "iteration   x1   x2   x3\n"); //fprintf means write on the opened file
+        do {
+
+
+               double d;
+                x3=(x1+x2)/2;
+           //  d=fabs(x3-sqrt(a));
+        //printf("%d %.6lf %.6lf %.6lf\n", i, x1, x2, x3);
+
+        fprintf(fo, "%d %.6lf %.6lf %.6lf\n", i, x1, x2, x3);
+                i=i+1;
+                f1=fx(x1, a);
+                f2=fx(x2, a);
+                f3=fx(x3, a);
+                if (f3*f1<0) {x2=x3; f2=f3;}
+                else {x1=x3; f1=f3;}
+
+//      if (d<1.0E-4)
+//      printf("|x3-sqrta|=%.6lf<1.0E-4\n", d);
+
+        }
+        while ((x2-x1)>1.0E-4);
+
+        fclose(fo);
+
+        return 0;
+}
+double fx(double x, double a){
+        double y;
+        y=x*x-a;
+        return y;
+}
+
+//after execution, comfirm using ls and cat
