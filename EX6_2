@@ -1,0 +1,42 @@
+//Bisection method tolerance=1.0E-4
+#include <stdio.h>
+#include <math.h> //when you complile -lm need!
+double fx(double x);
+int main(){
+
+        double x1=0.0, x2=3.0;
+        double f1, f2;
+        int i=1;
+
+        f1=fx(x1);
+        f2=fx(x2);
+
+        printf("iteration   x1   x2   x3\n");
+        do {
+
+                double x3, f3;
+                double d;
+                x3=(x1+x2)/2;
+                d=fabs(x3-sqrt(5));
+        printf("%d %.6lf %.6lf %.6lf\n", i, x1, x2, x3);
+                i=i+1;
+                f3=fx(x3);
+                if (f3*f1<0) {x2=x3; f2=f3;}
+                else {x1=x3; f1=f3;}
+
+                if (d<1.0E-4)
+
+        printf("|x3-sqrt5|=%.6lf<1.0E-4\n", d);
+        }
+
+        while ((x2-x1)>1.0E-4);
+        //printf("positivie root=%.6lf\n tolerance=1.0E-4\n", x3);
+
+        //printf("x3-sqrt5=%6.lf\n", x3-sqrt(5));
+        return 0;
+}
+double fx(double x){
+        double y;
+        y=x*x-5;
+        return y;
+}
