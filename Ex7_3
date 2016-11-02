@@ -1,0 +1,39 @@
+//ex7_3 Scant Method
+#include <stdio.h>
+#include <math.h>
+double fx(double x);
+int main(){
+
+        double x0=0.0, x1=3.0, x2;
+        double d, h;
+        int i=1;
+
+        printf("iteration x0 x1 x2\n");
+        do {
+
+        x2=x1-fx(x1)*(x1-x0)/(fx(x1)-fx(x0));
+        h=x1;
+        printf("%d %.6lf %.6lf %.6lf\n", i, x0, x1, x2);
+                i=i+1;
+                d=fabs(x2-x1);
+                x0=x1;
+                x1=x2;
+        }
+        while (d>1.0E-4);
+        printf("x1=%.6lf x2=%.6lf\n", h, x2);
+        printf("positive root is %.4lf\n", (x2+h)*0.5);
+
+
+return 0;
+
+
+}
+double fx(double x){
+        double y;
+        y=x*x-5;
+        return y;
+}
+~  
+
+// ans : x1=2.236067 x2=2.236068, positive root is 2.2361 
+// 2.2361 is rounded but it is okay
