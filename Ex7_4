@@ -1,0 +1,46 @@
+//ex7_4 x0=1 okay, x0=4 infinite 
+//Newton-Raphson method
+#include <stdio.h>
+#include <math.h>
+//#define N 1
+double fx(double x);
+double f(double x);
+int main(){
+
+        double N; // N converges between x range [-1.31~+3.911] 
+
+        scanf("%lf", &N);
+
+        printf("initial value x0=%lf\n", N);
+        double x0=N;
+        double x1, x2, d;
+        int i=1;
+
+        printf("i x0 x1\n");
+        do{
+
+        x1=x0-fx(x0)/f(x0);
+        printf("%d %.6lf %.6lf\n", i, x0, x1);
+                i=i+1;
+                x2=x0;
+                d=fabs(x1-x2);
+                x0=x1;
+        }
+        while (d>1.0E-4);
+
+return 0;
+
+}
+double fx(double x){
+        double y;
+        y=atan(x)-1;
+        return y;
+}
+double f(double x){
+        double yy;
+        yy=1.0/(1+x*x);
+        return yy;
+
+}
+~ 
+
