@@ -1,0 +1,43 @@
+//ex8-1_1 integral directly using mid-point rule
+//N=2, 4, 8, 16, ...
+//d<1.0E-4
+#include <stdio.h>
+#include <math.h>
+double func(double x);
+int main(){
+        int i=1, N=1, k;
+        double a=0.0, b=1.0, h, xmid, IN;
+        double fkk, sum=0.0, ans=0.0, d;
+
+        printf("a=%.1lf b=%.1lf\n", a, b);
+
+        do{
+                N=2*N;
+                h=(b-a)/N;
+
+                for (k=1; k<=N; k++){
+                xmid=a+(2*k-1)*h/2.0;
+                sum=sum+func(xmid);
+                }
+        IN=h*(sum);
+        d=fabs(ans-IN);
+        ans=IN;
+
+        printf("N=%d h=%.5lf IN=%.12lf\n", N, h, ans);
+        i=i+1;
+        sum=0.0;
+
+
+        }
+        while (d>1.0E-4);
+
+return 0;
+}
+double func(double x){
+        double y;
+        y=cos(x)/sqrt(x);
+        return y;
+}
+~
+//It takes more time than Simpson Rule. 
+~   
