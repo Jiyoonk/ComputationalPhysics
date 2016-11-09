@@ -1,0 +1,59 @@
+//Trapezoidal Rule
+//N=2, 4, 8, ...
+#include <stdio.h>
+#include <math.h>
+double func(double a, double x);
+int main(){
+        int i=1, N=1, k, b;
+        double p=0.0, q=1.0, h, xkk, IN;
+        double fkk, sum=0.0, d, ans=0.0;
+        double a;
+
+
+        FILE *fo;
+        fo=fopen("integral.d", "w");
+
+//      fprintf(fo, "a   I(a)  \n");  
+
+        for (b=0; b<=10; b++){
+        a=b/10.0;
+
+
+        do{
+
+                N=2*N;
+                h=(q-p)/N;
+                for (k=1; k<=N-1; k++){
+                xkk=xkk+h;
+                fkk=func(a, xkk);
+                sum=sum+fkk;
+                }
+        IN=0.5*h*(func(a, p)+2*sum+func(a, q));
+
+        d=fabs(ans-IN);
+        ans=IN;
+
+        i=i+1;
+        sum=0.0;
+        xkk=0.0;
+
+        }
+        while (d>1.0E-2);
+        fprintf(fo, "%.1lf %.12lf\n", a, ans);
+
+
+        }
+        fclose(fo);
+
+return 0;
+}
+double func(double a, double x){
+        double y;
+        y=exp(-a*x);
+        return y;
+}
+          
+        
+        
+// plot the data in "integral.d" 
+// postscript file named "integral.ps"
