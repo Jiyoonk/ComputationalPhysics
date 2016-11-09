@@ -1,0 +1,51 @@
+//ex8_4 computer friendly form 2cost^2 
+//Simpson Rule N=2, 4, 8, 16, ...
+//Stop when IN-IN-1 <1.0E-4
+#include <stdio.h>
+#include <math.h>
+double func(double x);
+int main(){
+        int i=1, N=1, k;
+        double a=0.0, b=1.0, h, xeven, xodd, IN;
+        double fkk, sumeven=0.0, sumodd=0.0, d=1.0, ans=0.0;
+        //first sum should be zero
+
+        printf("a=%.1lf b=%.1lf\n", a, b);
+        xeven=a;
+        xodd=a;
+
+        do{
+                N=2*N;
+                h=(b-a)/N;
+
+                for (k=1; k<=N/2; k++){
+                xeven=a+2*k*h;
+                xodd=a+(2*k-1)*h;
+
+                fkk=func(xeven);
+                sumeven=sumeven+fkk;
+
+                fkk=func(xodd);
+                sumodd=sumodd+fkk;
+                }
+        IN=1.0/3.0*h*(func(a)+4*sumodd+2*sumeven-func(b));
+
+        d=fabs(ans-IN);
+        ans=IN;
+
+        printf("N=%d h=%.5lf IN=%.12lf\n", N, h, ans);
+
+        i=i+1;
+        sumeven=0.0;
+        sumodd=0.0;//sum should be zero, returned
+
+        }
+        while (d>1.0E-4);
+
+return 0;
+}
+double func(double x){
+        double y;
+        y=2*cos(x*x);
+        return y;
+}
