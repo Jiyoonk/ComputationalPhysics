@@ -1,0 +1,41 @@
+//hw2_2
+//2x-tanx=0 the first two positive roots upto 4 digits belpw decimal point
+//I used the bisection method
+#include <stdio.h>
+#include <math.h>
+double fx(double x);
+int main(){
+
+        double x1=0.01, x2=1.5, x3; //I bracketed the solution manually
+        double f1, f2, f3;
+        int i=1, k;
+
+        for (k=1; k<=2; k++){
+        //Bisection method
+        do {
+                x3=(x1+x2)/2.0;
+        //      printf("%d %.6lf %.6lf %.6lf\n", i, x1, x2, x3);
+                i=i+1;
+                f3=fx(x3);
+                if (f3*f1<0) {x2=x3; f2=f3;}
+                else {x1=x3; f1=f3;}
+
+
+        }
+        while ((x2-x1)>1.0E-4);//Tolerance 1.0E-4
+        printf("positive root is %.4lf\n", 0.5*(x1+x2));
+
+        x1=0.01+M_PI;//tan(x) has a periodicity of pi
+        x2=1.5+M_PI; //So the second root would be between [0.01+pi, 1.5+pi]
+        i=1;
+
+        }
+
+
+return 0;
+}
+double fx(double x){
+        double y;
+        y=2.0*x-tan(x);
+        return y;
+}
