@@ -1,0 +1,50 @@
+//hw2_3
+//Original equation is k*a*cot(k*a)=-kappa*a
+//I changed the form of equation as tan(z)*sqrt((z0/z)*(z0/z)-1)+1=0
+//where z=k*a and z0=a/hbar*sqrt(2*m*V)
+//To get the solution, I used the bisection method
+#include <stdio.h>
+#include <math.h>
+double fz(double z0, double z);
+int main(){
+
+        double hbar, m, a, V, z0;
+        double x1=1.6, x2=3.0, x3; //bracket is [1.6, 3.0]
+        double f1, f2, f3, r1, ans;
+
+
+        hbar=1.1E-34; // in J.s :1J=1N.m=1kg.m*m/s/s so, J.s=kg.m*m/s
+        m=9.1E-31; // in kg
+        a=3.0E-10; // in m
+        V=10.0; // in eV : 1eV=1.6E-19J
+        z0=a/hbar*sqrt(2.0*m*V*1.6E-19); //unit conversion between eV and J
+        printf("z0=%.12lf\n", z0);
+
+        //Bisection method
+
+        f1=fz(z0, x1);
+        f2=fz(z0, x2);
+
+        do {
+        x3=(x1+x2)/2.0;
+        printf("%.6lf %.6lf %.6lf\n", x1, x2, x3);
+        f3=fz(z0, x3);
+        if (f3*f1<0) {x2=x3; f2=f3;}
+        else {x1=x3; f1=f3;}
+
+
+        }
+        while ((x2-x1)>1.0E-4); //I arbitrarily set the tolerance as 1.0E-4
+        r1=(x1+x2)/2.0;
+        printf("z=%.6lf\n", r1); //Now we got z
+        ans=V*(r1*r1/z0/z0-1.0); // Conver z to energy [eV]
+        printf("ans E=%.6lfeV\n", ans);
+
+return 0;
+}
+double fz(double z0, double z){
+        double y;
+        y=tan(z)*sqrt((z0/z)*(z0/z)-1.0)+1.0;
+        return y;
+}
+
