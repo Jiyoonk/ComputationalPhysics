@@ -1,0 +1,50 @@
+ /*Euler method*/
+#include <stdio.h>
+#include <math.h>
+int main(){
+        double vbar, tbar, v, t, delt;
+        double m, g, b, v0;
+        int i;
+        char fs[80];
+        FILE *fo;
+
+        m=1.0; // in kg
+        g=9.8; // in m/s^2
+        b=3.9; // in kg/s
+        v0=0.0; // in m/s
+
+        delt=0.5; // no unit
+        tbar=0.0; // t=0sec
+        vbar=0.0; // initial velocity
+
+        for (i=1; i<=3; i++){
+
+        sprintf(fs, "delt_%.1lf.d", delt);
+
+        printf("delt=%.1lf\n", delt);
+        printf("tbar   vbar   t   v\n");
+
+        fo=fopen(fs, "w");
+
+        do{
+        t=tbar*m/b;
+        v=vbar*m*g/b;
+
+        printf("%.1lf %.4lf %.5lf %.5f\n", tbar, vbar, t, v);
+        fprintf(fo, "%.5lf %.5lf\n", t, v);
+
+        vbar=vbar+(1-vbar)*delt;
+        tbar=tbar+delt;
+
+        }while (tbar<=10.0);
+
+        delt=delt-0.2;
+        tbar=0.0;
+        vbar=0.0;
+
+        fclose(fo);
+
+        }
+return 0;
+}
+
