@@ -1,0 +1,56 @@
+ #include <stdio.h>
+#include <math.h>
+int main(){
+        double vxbar, vybar, tbar, vx, vy, t, delt;
+        double m, g, b, v0, theta0;
+        double xbar, x, ybar, y, d;
+        int i=1, k;
+
+        char fs[80];
+        FILE *fo;
+
+        m=1.0; // in kg
+        g=9.8; // in m/s^2
+        b=3.9; // in kg/s
+        v0=25.0; // in m/s
+
+        delt=0.1; // no unit
+        tbar=0.0; //t=0sec
+        vxbar=sqrt(3.0)/2.0*v0/m/g*b;
+        vybar=1.0/2.0*v0/m/g*b;
+
+        xbar=0.0; // x=0 at t=0
+        ybar=0.0; // y=0 at t=0
+        sprintf(fs, "ball.d");
+        printf("delt=%.1lf\n", delt);
+        printf("tbar   t    xbar     x     vxbar     vx     ybar    y    vybar    vy\n");
+
+        fo=fopen(fs, "w");
+
+        fprintf(fo, "t   x(t)   y(t)   vx(t)   vy(t)\n");
+        do{
+        t=tbar*m/b;
+        vx=vxbar*m*g/b;
+        vy=vybar*m*g/b;
+        x=xbar*m*m*g/b/b;
+        y=ybar*m*m*g/b/b;
+        printf("%.1lf %.5lf %.5lf %.5lf %.5lf %.5lf %.5lf %.5lf %.5lf %.5lf\n", tbar, t, xbar, x, vxbar, vx, ybar, y, vybar, vy);
+        fprintf(fo, "%.5lf %.5lf %.5lf %.5lf %.5lf\n", t, x, y, vx, vy);
+        d=y;
+        vxbar=vxbar-vxbar*delt;
+        vybar=vybar+(-1.0-vybar)*delt;
+        xbar=xbar+vxbar*delt;
+        ybar=ybar+vybar*delt;
+        tbar=tbar+delt;
+
+        } while (ybar>0.0);
+
+
+
+        fclose(fo);
+
+
+
+return 0;
+}
+
