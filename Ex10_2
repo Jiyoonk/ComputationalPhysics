@@ -1,0 +1,45 @@
+/*2nd Order Runge-Kutta Method
+ *deltat=0.3
+ * */
+#include <stdio.h>
+#include <math.h>
+int main(){
+        double vbar1, vbar2, tbar, v, t, delt;
+        double m, g, b, v0;
+        char fs[80];
+        FILE *fo;
+
+        m=1.0; // in kg
+        g=9.8; // in m/s^2
+        b=3.9; // in kg/s
+        v0=0.0; // in m/s
+
+        delt=0.3; // no unit
+        tbar=0.0; // t=0sec
+        vbar1=0.0; // initial velocity
+
+        sprintf(fs, "RG_delt_%.1lf.d", delt);
+
+        printf("delt=%.1lf\n", delt);
+        printf("tbar   vbar1 vbar2   t   v\n");
+
+        fo=fopen(fs, "w");
+
+        do{
+        t=tbar*m/b;
+        v=vbar1*m*g/b;
+
+        printf("%.1lf %.4lf %.4lf %.5lf %.5f\n", tbar, vbar1, vbar2, t, v);
+        fprintf(fo, "%.6lf %.6lf\n", t, v);
+
+        vbar2=vbar1+(1-vbar1)*0.5*delt;
+        vbar1=vbar1+(1-vbar2)*delt;
+        tbar=tbar+delt;
+
+        }while (tbar<=10.0);
+
+        fclose(fo);
+
+return 0;
+}
+
