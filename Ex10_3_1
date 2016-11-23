@@ -1,0 +1,55 @@
+/*Predictor-corrector method
+ * n=2 <- v'=-n(x)^(n-1)
+ * draw x vs. t graph
+ */
+#include <stdio.h>
+#include <math.h>
+int main(){
+        double vbar1, vbar2, xbar1, xbar2, xbari, tbar, v, x, t, delt;
+        double m, k, a;
+        int n;
+
+        char fs[80];
+        FILE *fo;
+
+        n=2;
+        delt=0.1; // no unit
+        m=3.0; // in kg
+        k=2.0; // in N
+        a=0.25; // in m 
+        x=2.1; // in m initial position
+
+        vbar1=0.0; // no unit   
+        xbar1=x/a; // no unit
+        tbar=0.0; //t=0sec
+
+        sprintf(fs, "PC.d");
+        printf("delt=%.1lf\n", delt);
+        printf("tbar   t    xbar1     x     vbar1     v \n");
+
+        fo=fopen(fs, "w");
+
+        //fprintf(fo, "t   x(t)   y(t)   vx(t)   vy(t)\n");
+        do{
+        v=vbar1*sqrt(k*a/m);
+        x=xbar1*a;
+        t=tbar*sqrt(m*a/k);
+
+        printf("%.1lf %.5lf %.5lf %.5lf %.5lf %.5lf\n", tbar, t, xbar1, x, vbar1, v);
+        fprintf(fo, "%.5lf %.5lf %.5lf\n", t, x, v);
+        vbar2=vbar1+(-n*xbar1)*delt;
+        xbar2=xbar1+vbar1*delt;
+        xbari=xbar1; 
+        tbar=tbar+delt;
+        xbar1=xbar1+0.5*(vbar1+vbar2)*delt;
+        vbar1=vbar1+0.5*((-n*xbari)+(-n*xbar2))*delt;
+  
+        //ideally, we need to set k1, k2 respectively
+
+        } while (tbar<=10.0);
+
+        fclose(fo);
+
+return 0;
+}
+
