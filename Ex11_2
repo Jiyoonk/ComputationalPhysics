@@ -1,0 +1,53 @@
+// 10000~100000 random numbers
+// seed 1, 2, 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define N 10000
+double drand();
+int main(){
+        int i, s=1, k, n;
+        double sum=0.0, sum2=0.0, sum3=0.0, sum4=0.0;
+        double r, mean, mean2, sd;
+        double IN, error;
+        char fs[80];
+        FILE *fo;
+
+
+        srand(s);
+        sprintf(fs, "MCintegral.d");
+
+        fo=fopen(fs, "w");
+        for (k=1; k<=10; k++){
+        n=k*N;
+        sum=0.0;
+        sum2=0.0;
+        for (i=1; i<=N; i++){
+        r=drand();
+        sum=sum+sin(r);
+        sum2=sum2+sin(r)*sin(r);
+        }
+        mean=(sum3+sum)/n;
+        mean2=(sum4+sum2)/n;
+        sum3=mean*n;
+        sum4=mean2*n;
+        sd=sqrt(mean2-mean*mean); // sd should be multiplied by pi!!!!!!!! 
+        IN=M_PI*mean;
+        error=M_PI*3.0*sd/sqrt(n); //error should be multiplied by pi!!! bc the range of x is also multiplied !!!!!!!
+        printf("%d %.6lf %.6lf\n", n, IN, error);
+
+        fprintf(fo, "%d %.6lf %.6lf\n", n, IN, error);
+
+        }
+
+        fclose(fo);
+
+return 0;
+}
+double drand(){
+        double d;
+        d=M_PI*rand()/(RAND_MAX+1.0);
+        return d;
+}
+// In conclusion, the error is decreasing as n increases. 
+// If you want to plot line +points, plot 2 times. 
