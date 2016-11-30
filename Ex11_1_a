@@ -1,0 +1,34 @@
+// 1000 random numbers
+// seed 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define N 1000
+double drand(){
+        double d;
+        d=rand()/(RAND_MAX+1.0);
+        return d;
+}
+int main(){
+        int i, s;
+        double sum=0.0, sum2=0.0;
+        double m, m2, sd, r;
+        s=3;
+        srand(s);
+        printf("%d\n\n", RAND_MAX);
+        for (i=1; i<=N; i++){
+        r=drand(); // assign variable r and use r for each calculation!!!!
+        sum=sum+r;
+        sum2=sum2+r*r;
+        //printf("sum=%.5lf\n i=%d", sum, i);
+        }
+        //printf("i=%d\n", i);
+        m=sum/N;
+        m2=sum2/N;
+        sd=sqrt(m2-m*m);
+        printf("m=%.6lf, sd=%.6lf\n", m, sd);
+
+
+return 0;
+}
+
