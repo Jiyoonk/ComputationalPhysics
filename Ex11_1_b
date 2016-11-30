@@ -1,0 +1,47 @@
+// 100000 random numbers
+// seed 1, 2, 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define N 1000
+double drand();
+int main(){
+        int i, s, k, n;
+        double sum=0.0, sum2=0.0;
+        double m, r, mean;
+        char fs[80];
+        FILE *fo;
+
+        for (s=1; s<=3; s++){
+        srand(s);
+        sprintf(fs, "statistics_%d.d", s);
+
+        fo=fopen(fs, "w");
+        for (k=1; k<=100; k++){
+        n=k*N;
+        sum=0.0;
+        for (i=1; i<=N; i++){
+        r=drand();
+        sum=sum+r;
+        }
+        mean=(sum2+sum)/n;
+        sum2=mean*n;
+
+        fprintf(fo, "%d %.6lf\n", n, mean);
+        printf("n=%d mean=%.6lf\n", n, mean);
+        printf("\n");
+
+
+        }
+
+        fclose(fo);
+        sum2=0.0; // outside the loop, sum2 should be zero
+        }
+return 0;
+}
+double drand(){
+        double d;
+        d=rand()/(RAND_MAX+1.0);
+        return d;
+}
+
