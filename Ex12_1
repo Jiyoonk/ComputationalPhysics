@@ -1,0 +1,66 @@
+//ex12_1
+//trapezoidal rule N=2, 4, 8, ....
+//ans : x=0.382608
+#include <stdio.h>
+#include <math.h>
+double integral(double x);
+double func(double x, double a);
+int main(){
+
+// bisection method to find root
+        double x1=0.0, x2=1.0, x3;
+        double f1, f2, f3;
+
+//printf("%lf\n", integral(0.0)); //you should check above all whether the integral part is right by putting a simple value 
+//printf("%lf\n", integral(0.1));       
+        f1=integral(x1);
+        f2=integral(x2);
+        do{
+        x3=0.5*(x1+x2);
+        f3=integral(x3);
+        if (f3*f1<0) {x2=x3; f2=f3;}
+        else {x1=x3; f1=f3;}
+
+        }while ((x2-x1)>1.0E-5); // bisection's tolerance can affect 
+        printf("root is %lf\n", x3);
+
+
+return 0;
+}
+double integral(double x){
+        int N=1, k;
+        double p=1.0, q=3.0, h, xkk, IN;
+        double fkk, sum, ans=0.0, d;
+        //first sum should be zero      
+
+        //printf("p=%.1lf q=%.1lf\n", p, q);
+        do{
+
+                N=2*N;
+                h=(q-p)/N;
+                for (k=1; k<=N-1; k++){ //k=1, 2, ..., N-1
+                xkk=p+k*h;// xkk=xkk+h -> wrong....why? [p,q]!!!!! xkk=p+h at first..
+                fkk=func(xkk, x);//function value -> sum : step sequence matters
+                sum=sum+fkk;
+                }
+        IN=0.5*h*(func(p, x)+2.0*sum+func(q, x)); //trapezoidal rule
+        //printf("N=%d h=%lf IN=%lf\n", N, h, IN);
+        d=fabs(ans-IN);
+        ans=IN;
+//      printf("IN=%lf\n", ans);
+        sum=0.0; //sum should be zero, returned. 
+                }while (d>1.0E-6); //integral tolerance affect on given value x!!
+
+        double y;
+        y=ans-x;
+        ans=0.0;
+        return y;
+}
+double func(double t, double x){
+        double f;
+        f=1.0/(t*t*t+x);
+        return f;
+}
+
+
+
