@@ -1,0 +1,48 @@
+/*Euler method*/
+#include <stdio.h>
+#include <math.h>
+double fy(double y, double x);
+int main(){
+        double y, yst1, yst2, x=0.0, delx, k, k1, k2;
+        double y0, x0;
+        int i;
+
+        y0=0.0; // no unit
+        y=y0;
+        delx=0.1; // no unit
+        x=0.0;
+
+        printf("delx=%.1lf\n", delx);
+        printf("Method  x   y\n");
+
+
+        while (x<=1.0){
+
+        k=fy(y, x);
+        yst1=y+delx*k;
+        y=yst1;
+        //printf("%.1lf %.4lf\n", x, y);
+        x=x+delx;
+        }
+
+        printf("Euler %.1lf %.4lf\n", x-delx, y);
+        y=y0;
+        x=0.0;
+
+        while (x<=1.0){
+        k1=fy(y,x);
+        yst2=y+0.5*k1*delx;
+        k2=fy(yst2, x+0.5*delx);
+        yst2=y+k2*delx;
+        y=yst2;
+        x=x+delx;
+        }
+        printf("RK2nd %.1lf %.4lf\n", x-delx, y);
+
+return 0;
+}
+double fy(double y, double x){
+        double k;
+        k=y*y+1.0;
+        return k;
+}
