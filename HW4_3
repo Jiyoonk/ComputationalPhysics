@@ -1,0 +1,56 @@
+/* Simple sampling*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#define N 10000
+double drand();
+double func(double x, double y);
+int main(){
+        int i, s=1, k=1, n;
+        double r, x, y, sum=0.0, sum2=0.0, sum3=0.0, sum4=0.0;
+        double S, mean, mean2, sd;
+        double I, error;
+
+        srand(s);
+
+        do {
+
+        n=k*N;
+        sum=0.0;
+        sum2=0.0;
+        for (i=1; i<=N; i++){
+
+        x=drand();
+        y=M_PI*drand(); // you should call random number for each x, y
+        sum=sum+func(x, y);
+        sum2=sum2+func(x, y)*func(x, y);
+        }
+        S=sum3+sum;
+        mean=S/n;
+        sum3=S;
+        mean2=(sum4+sum2)/n;
+        sum4=mean2*n;
+        sd=M_PI*sqrt(mean2-mean*mean); // you only need to multiply pi one time for standard deviation 
+        I=M_PI*mean; // integral = area(=1*pi) * mean
+        error=3.0*sd/sqrt(n);
+
+        //printf("n=%d ans=%lf error=%lf\n", n, I, error);
+        k=k+1;
+
+        }while (error>0.999E-3);
+        printf("the number of average=%d integral value=%lf error=%lf\n", n, I, error);
+
+
+return 0;
+}
+double func(double x, double y){
+        double f;
+        f=1.0/sqrt(2.0-x*cos(y)*cos(y));
+        return f;
+}
+double drand(){
+        double d;
+        d=rand()/(RAND_MAX+1.0);
+        return d;
+}
+
