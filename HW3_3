@@ -1,0 +1,70 @@
+INCOMPLETE
+// hw3_3 solve equation by numerical integrations for n=0, 1, 2
+//Mid-point rule, root finding
+#include <stdio.h>
+#include <math.h>
+double fx(double p, double r);
+int main(){
+        double hconst, m, keusi, V0, right, r;
+        double e1, e2, e3, f1, f2, f3, d; // for root finding
+        int n=0, i=1, N;
+
+        hconst=6.63E-27; // in erg.s
+        m=9.11E-31; // in kg
+        keusi=3.0E-10; //in m
+        V0=1.0; // in eV
+
+
+        for (n=0; n<=3; n++){
+        printf("n=%d\n", n);
+
+        right=hconst/4.0/keusi/sqrt(2.0*m*V0)*(n+0.5)*0.01/sqrt(1.602E-12); //in no unit
+        printf("right=%.10lf\n", right);
+
+        e1=1.0;
+        e2=10.0;
+        r=right;
+        do{
+        f1=fx(e1, r);
+        f2=fx(e2, r);
+
+        e3=(e1+e2)/2.0;
+        d=fabs(e3-r);
+        i=i+1;
+        f3=fx(e3, r);
+        if (f3*f1<0) {e2=e3; f2=f3;}
+        else {e1=e3; f1=f3;}
+        if (d<1.0E-4)
+        printf("energy=%.5lfeV\n", e3);
+
+        } while ((e2-e1)>1.0E-4);
+        }
+return 0;
+}
+double fx(double p, double r){
+        double z, h, xmid, IN, k, sum=0.0, ans=0.0, dd, b;
+        int N=1;
+        b=log(p+1);
+        ans=0.0;
+        do{
+                N=2*N;
+                h=(b-0.0)/N;
+                for (k=1; k<=N; k++){
+                
+                xmid=0.0+(2*k-1)*h/2.0;
+                sum=sum+sqrt(p+1-exp(xmid));
+                }
+        IN=h*(sum);
+        dd=fabs(ans-IN);
+        ans=IN;
+        sum=0.0;
+
+        }while (dd>1.0E-4);
+        printf("%.5lf\n", ans);
+        z=ans-r;
+//      sum=0.0;
+        ans=0.0;
+        return z;
+}
+
+                
