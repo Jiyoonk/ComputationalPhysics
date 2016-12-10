@@ -1,0 +1,49 @@
+//hw3_2 calcuate T for theta0=0.01, pi/6, pi/2, 5pi/6 by using numerical integrations.
+//Midpoint rule
+#include <stdio.h>
+#include <math.h>
+double func(double theta0, double theta);
+int main(){
+        int i=1, N=1, k, p;
+        double theta0, theta, l, g, h, xmid, IN;
+        double fkk, sum=0.0, d, ans=0.0;
+        double T;
+
+        l=1.0; // in m
+        g=9.8; //in m/s^2
+        theta0=0.01;
+
+        for (p=1; p<=4; p++){
+        printf("When theta0 is %.5lf,\n", theta0);
+        do{
+                N=2*N;
+                h=(theta0-0.0)/N;
+                for (k=1; k<=N-1; k++){
+                xmid=0.0+(2*k-1)*h/2.0;
+                fkk=func(theta0, xmid);
+                sum=sum+fkk;
+                }
+        IN=h*(sum); //tN diverges at theta~theta0
+        d=fabs(ans-IN);
+        ans=IN;
+
+        sum=0.0;
+        xmid=0.0;
+        }
+        while (d>1.0E-3);
+
+
+        T=4.0*sqrt(l/2.0/g)*ans;
+        printf("the period is %.5lf sec\n", T);
+        printf("\n");
+        theta0=(2.0*p-1.0)*M_PI/6.0;
+        }
+
+
+return 0;
+}
+double func(double theta0, double theta){
+        double y;
+        y=1.0/sqrt(cos(theta)-cos(theta0));
+        return y;
+}
