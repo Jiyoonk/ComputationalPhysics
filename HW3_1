@@ -1,0 +1,52 @@
+//hw3_1 integral upto 3digits below decimal point
+//simpson rule N=2, 4, 8, 16, ...
+//Numerical integration
+#include <stdio.h>
+#include <math.h>
+double func(double x);
+int main(){
+        int i=1, N=1, k;
+        double a=0.0, b=M_PI, h, xeven, xodd, IN;
+        double fkk, sumeven=0.0, sumodd=0.0, d=1.0, ans=0.0;
+        //first sum should be zero
+
+        printf("a=%.1lf b=%.6lf\n", a, b);
+        xeven=a;
+        xodd=a;
+
+        do{
+                N=2*N;
+                h=(b-a)/N;
+
+                for (k=1; k<=N/2; k++){
+                xeven=a+2*k*h;
+                xodd=a+(2*k-1)*h;
+
+                sumeven=sumeven+func(xeven);
+                sumodd=sumodd+func(xodd);
+
+                }
+        IN=1.0/3.0*h*(1+4*sumodd+2*sumeven-func(b)); // 1/x diverges at x=0
+        // near x=0, the function can be approximated as~1. so f(0) ~ 1
+
+        d=fabs(ans-IN);
+        ans=IN;
+
+        printf("N=%d h=%.5lf IN=%.3lf\n", N, h, ans);
+
+        i=i+1;
+        sumeven=0.0;
+        sumodd=0.0;
+
+        }
+        while (d>1.0E-4);
+
+        printf("area under the curve of  sinx/x with range of [0, pi] is %.3lf\n", ans);
+        return 0;
+}
+double func(double x){
+        double y;
+        y=sin(x)/x;
+        return y;
+}
+
