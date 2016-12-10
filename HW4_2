@@ -1,0 +1,56 @@
+/*RK delt=N I did not use 'bar' thingys...
+ * pendulum
+ * obtain tm */
+#include <stdio.h>
+#include <math.h>
+#define N 0.1
+double ftheta(double th, double t, double al);
+double gtheta(double th, double t, double al);
+int main(){
+        double g, l, t, th, thst, al, alst;
+        double delt, Ct, Cal, k1th, k1al, k2th, k2al;
+
+        delt=0.0000001; // no unit
+        g=9.8; // in m/s^2
+        l=1.0; // in m
+
+        t=0.0;
+        th=M_PI/2.0;
+        al=0.0;
+
+        Ct=sqrt(g/l); // no need if there is no bar 
+        Cal=sqrt(l/g);
+        //tbar=Ct*t;
+        //thbar=th;
+        //albar=Cal*t;
+        //deltbar=Ct*delt;
+
+//      printf("%lf %lf\n", tbar*Ct, thbar);
+        while (th>=1.0E-6){
+//      printf("%lf %lf %lf\n", t, al, th);
+        k1th=ftheta(th, t, al);
+        k1al=gtheta(th, t, al);
+        thst=th+0.5*delt*k1th;
+        alst=al+0.5*delt*k1al;
+        k2th=ftheta(thst, t+delt, alst);
+        k2al=gtheta(thst, t+delt, alst);
+        th=th+k2th*delt;
+        al=al+k2al*delt;
+
+        t=t+delt;
+
+        }
+        printf("tm=%.5lf at theta=%lf\n", t-delt, th-k2th*delt);
+return 0;
+}
+double ftheta(double th, double t, double al){
+        double ft;
+        ft=al;
+        return ft;
+}
+double gtheta(double th, double t, double al){
+        double gt, g=9.8, l=1.0;
+        gt=-g/l*sin(th);
+        return gt;
+}
+
